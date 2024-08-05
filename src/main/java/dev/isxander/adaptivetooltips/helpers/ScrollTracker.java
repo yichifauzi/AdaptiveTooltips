@@ -47,7 +47,7 @@ public class ScrollTracker {
     }
 
     public static void scroll(GuiGraphics graphics, List<ClientTooltipComponent> components, int x, int y, int width, int height, int screenWidth, int screenHeight) {
-        tick(components, x, y, width, height, screenWidth, screenHeight, Minecraft.getInstance().getDeltaFrameTime());
+        tick(components, x, y, width, height, screenWidth, screenHeight, Minecraft.getInstance().getTimer().getGameTimeDeltaTicks());
 
         // have to use a translate rather than moving the tooltip's x and y because int precision is too jittery
         graphics.pose().translate(ScrollTracker.getHorizontalScroll(), ScrollTracker.getVerticalScroll(), 0);
@@ -119,8 +119,8 @@ public class ScrollTracker {
             } else if (c1 instanceof ClientBundleTooltip bt1 && c2 instanceof ClientBundleTooltip bt2) {
                 // gets the inventory of each bundle and loops through each stack
                 
-                Iterator<ItemStack> i1 = ((BundleTooltipComponentAccessor) bt1).getItems().iterator();
-                Iterator<ItemStack> i2 = ((BundleTooltipComponentAccessor) bt2).getItems().iterator();
+                Iterator<ItemStack> i1 = ((BundleTooltipComponentAccessor) bt1).getContents().items().iterator();
+                Iterator<ItemStack> i2 = ((BundleTooltipComponentAccessor) bt2).getContents().items().iterator();
 
                 // iterate through both bundle inventories until either runs out
                 while (i1.hasNext() && i2.hasNext()) {

@@ -2,7 +2,6 @@ plugins {
     java
 
     alias(libs.plugins.loom)
-    alias(libs.plugins.loom.quiltflower)
 
     alias(libs.plugins.minotaur)
     alias(libs.plugins.cursegradle)
@@ -19,7 +18,6 @@ repositories {
     maven("https://maven.isxander.dev/releases")
     maven("https://maven.isxander.dev/snapshots")
     maven("https://maven.terraformersmc.com/releases")
-    maven("https://jitpack.io")
     maven("https://maven.quiltmc.org/repository/release")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
@@ -37,12 +35,6 @@ dependencies {
     modImplementation(libs.fabric.api)
     modImplementation(libs.yacl)
     modImplementation(libs.mod.menu)
-
-    libs.mixin.extras.let {
-        implementation(it)
-        annotationProcessor(it)
-        include(it)
-    }
 }
 
 tasks {
@@ -143,7 +135,7 @@ if (hasProperty("curseforge.token") && curseforgeId.isNotEmpty()) {
     }
 }
 
-githubRelease {
+/*githubRelease {
     token(findProperty("github.token")?.toString())
 
     val githubProject: String by project
@@ -158,7 +150,7 @@ githubRelease {
     tasks.getByName("githubRelease") {
         dependsOn("optimizeOutputsOfRemapJar")
     }
-}
+}*/
 
 publishing {
     publications {
